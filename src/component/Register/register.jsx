@@ -40,9 +40,9 @@ const Register = () => {
             </div>
             <div className="button-container">
                 <button>
-                    Login
+                    Sign Up
                 </button>
-                <p className=''>Don't have account?<span> Sign Up</span></p>        
+                <p className=''>Go back to<span> Login</span></p>        
             </div>
         </div>
     </form>

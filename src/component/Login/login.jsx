@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route,Link,RouterProvider } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion';
 import './login.css'
 import Logo from '../../assets/logo.png'
@@ -37,9 +37,9 @@ const Login = () => {
             </div>
             <div className="button-container">
                 <button>
-                    Login
+                        Login
                 </button>
-                <p className=''>Don't have account?<span> Sign Up</span></p>        
+                <p className=''>Don't have account?<span>Sign up</span></p>        
             </div>
         </div>
     </form>
