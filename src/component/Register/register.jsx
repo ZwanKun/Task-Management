@@ -42,7 +42,7 @@ const Register = () => {
                 <button>
                     Login
                 </button>
-                <p className=''>Don't have account?<span> Sign Up</span></p>        
+                <p className=''>Don have account?<span> Sign Up</span></p>        
             </div>
         </div>
     </form>
