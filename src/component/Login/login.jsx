@@ -1,10 +1,14 @@
-import React from 'react'
+import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion';
 import './login.css'
 import Logo from '../../assets/logo.png'
 
 const Login = () => {
+
+  const[mail, setMail] = useState("")
+
+
   return (
     <form className='form-container'>
         <div className="logo-container">
@@ -35,15 +39,13 @@ const Login = () => {
             <div className='password-input'>
                 <input type='password' placeholder='Password' required/>
             </div>
-            <div className="button-container">
-                <button>
+            <Link className="login-button">
                         Login
-                </button>
-                <p className=''>Don't have account?<span>Sign up</span></p>        
-            </div>
+            </Link>
+             <Link to='/register' className='link-display'>Don't have account? Sign up</Link>        
         </div>
     </form>
   )
 }
 
-export default Login
+export default Login;

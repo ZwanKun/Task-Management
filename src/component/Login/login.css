@@ -56,23 +56,24 @@ input {
 
 
 
-.button-container button {
+.login-button {
     padding: 12px;
     color: white;
     background-color: rgb(16, 16, 16);
-    width: 27vw;
+    width: 25vw;
+    font-size: 15px;
     border: 1px solid rgba(44, 44, 44, 0.68);
     border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
 }
 
 
-p { 
-    color:gray;
+.link-display { 
+    color:white;
     text-align: center;
     margin-top: 30px;
     font-size: 13px;
-}
+    text-decoration: none;
+} 
 
-span { 
-    color: white;
-}
