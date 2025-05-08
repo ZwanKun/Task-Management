@@ -10,6 +10,28 @@ app.use(cors())
 
 moongose.connect("mongodb://localhost:27017/users")
 
+
+app.post('/', (req, res) => {
+    const { name, password } = req.body;
+  
+    UserModel.findOne({ name: name })
+      .then(user => {
+        if (user) {
+          if (user.password === password) {
+            res.json("You are connected");
+          } else {
+            res.json("password is incorrect");
+          }
+        } else {
+          res.json("no user found");
+        }
+      })
+      .catch(err => {
+        console.error("Login error:", err);
+        res.status(500).json("Internal server error");
+      });
+  });
+  
 app.post('/register', (req, res) => {
 
     console.log("Received data:", req.body);

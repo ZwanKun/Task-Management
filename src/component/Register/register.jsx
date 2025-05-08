@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import './register.css'
 import Logo from '../../assets/logo.png'
-import SuccessModal from '../Modal/successModal';
 
 const Register = () => {
 
-  const[name, setName] = useState();
-  const[email, setEmail] = useState();
-  const[password, setPassword] = useState();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const[name, setName] = useState('');
+  const[email, setEmail] = useState('');
+  const[password, setPassword] = useState('');
+  const navigate = useNavigate()
 
 
   const handleSubmit = (e) => {
@@ -19,24 +18,16 @@ const Register = () => {
     console.log("Form submitted"); 
     axios.post('http://localhost:3001/register', {name, email, password})
     .then(result => { console.log(result)
-    setEmail('');
+    navigate('/')
     setName('');
+    setEmail('');
     setPassword('');
-    setIsModalOpen(true)
   })
     .catch(err => console.log(err))
   }
-const closeModal = () => {
-    setIsModalOpen(false); // Close the modal
-  };
+
 
   return (
-  <>
-  <SuccessModal isOpen={isModalOpen} closeModal={closeModal}
-   initial={{ opacity: 0, y: -20 }}
-   animate={{ opacity: 1, y: 0 }}
-   transition={{ duration: 1, ease: 'easeOut' }}
-    />
     <form className='form-container' onSubmit={handleSubmit}>
         <div className="logo-container">
             <motion.img src={Logo}
@@ -71,7 +62,7 @@ const closeModal = () => {
              </div>
              <div className='mail-input'>
                 <input
-                 type='mail'
+                 type='email'
                  placeholder='Email'
                  name='email'
                  value={email}
@@ -93,7 +84,6 @@ const closeModal = () => {
                 <Link to='/' className='link-display'>Go back to Login</Link>        
         </div>
     </form>
-</>
   )
 }
 

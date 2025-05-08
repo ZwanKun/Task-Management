@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Login from './component/Login/login';
 import Register from './component/Register/register';
+import Dashboard from './component/Dashboard/Dashboard';
 import AuthLayout from './component/Authlayout';
 import './App.css';
 
@@ -23,6 +24,7 @@ function App() {
               <Login />
             </AuthLayout>
           }></Route>
+            <Route path='/dashboard' element={<Dashboard />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
