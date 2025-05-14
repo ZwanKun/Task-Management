@@ -14,11 +14,13 @@ div{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: black; 
     border: 2px solid rgba(44, 44, 44, 0.68);
     border-radius: 10px;
     height: 70vh;
     width: 32vw;
     margin-top: 90px;
+    z-index: 999;
 }
 
 .logo-container {
@@ -26,7 +28,7 @@ div{
 }
 
 .logo-container img{
-    margin-top: 7px;
+    margin-top: 12px;
     width: 70px;
     height: 65px;
 }
@@ -77,3 +79,11 @@ input {
     text-decoration: none;
 } 
 
+
+.text-red-500{
+    color: red;
+}
+
+.text-green-500{
+    color: green;
+}

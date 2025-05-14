@@ -1,0 +1,9 @@
+  .connection-container {
+    position: relative;
+    display: flex;
+    z-index: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;/* sits above the animation */
+    height: 95vh;
+  }

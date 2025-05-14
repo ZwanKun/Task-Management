@@ -13,17 +13,32 @@ moongose.connect("mongodb://localhost:27017/users")
 
 app.post('/', (req, res) => {
     const { name, password } = req.body;
+
+     if (!name || !password) {
+              return err.status(400).json({
+                  success: false,
+                  message: "Please provide both name and password"
+              })
+            }     
   
     UserModel.findOne({ name: name })
       .then(user => {
         if (user) {
           if (user.password === password) {
-            res.json("You are connected");
+              res.json({
+                "success": true,
+                "message": "Login Successfully"
+              })
           } else {
-            res.json("password is incorrect");
-          }
+            res.json({
+              "success": false,
+              "message": "Your password is incorrect. Please try again!"
+          })}
         } else {
-          res.json("no user found");
+          res.json({
+            "success": false, 
+            "message": "account does not exist",
+          });
         }
       })
       .catch(err => {
@@ -37,11 +52,16 @@ app.post('/register', (req, res) => {
     console.log("Received data:", req.body);
 
     UserModel.create(req.body)
-        .then(users => res.json(users))
+        .then(user => res.status(201).json({
+            success: true,
+            message: "User registered successfully!",
+            user: {
+            name: user.name,
+            email: user.email, 
+        }}))
         .catch(err => {
-            console.error("Error saving user:", err);  // Log the error to the console
+            console.error("Error saving user:", err);
             if (err.code === 11000) {
-                // MongoDB unique constraint violation
                 res.status(400).json({ message: "Email already exists" });
             } else {
                 res.status(500).json({ message: "Error registering user", error: err });

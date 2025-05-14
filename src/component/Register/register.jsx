@@ -3,7 +3,7 @@ import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import './register.css'
-import Logo from '../../assets/logo.png'
+import Logo from '../../assets/logo1.png'
 
 const Register = () => {
 
@@ -12,19 +12,32 @@ const Register = () => {
   const[password, setPassword] = useState('');
   const navigate = useNavigate()
 
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted"); 
-    axios.post('http://localhost:3001/register', {name, email, password})
-    .then(result => { console.log(result)
-    navigate('/')
-    setName('');
-    setEmail('');
-    setPassword('');
-  })
-    .catch(err => console.log(err))
-  }
+    setError('');
+    setMessage('');
+
+    axios.post('http://localhost:3001/register', { name, email, password })
+      .then(result => {
+        // Assuming the backend sends a message
+        if (result.data.success) {
+          setMessage(result.data.message); // Successful registration message
+          setName('');
+          setEmail('');
+          setPassword('');
+          navigate('/'); // Redirect to login page
+        } else {
+          setError(result.data.message); // Display any error messages from the backend
+        }
+      })
+      .catch(err => {
+        console.error("Error during registration:", err);
+        setError("Something went wrong. Please try again later."); // Handle unexpected errors
+      });
+};
 
 
   return (
@@ -81,6 +94,8 @@ const Register = () => {
              <button type="submit" className='register-button'>
                 Sign Up
             </button>
+              {error && <p className="text-red-500">{error}</p>}
+              {message && <p className="text-green-500">{message}</p>}  
                 <Link to='/' className='link-display'>Go back to Login</Link>        
         </div>
     </form>

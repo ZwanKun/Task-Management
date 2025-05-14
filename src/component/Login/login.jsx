@@ -3,24 +3,31 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import './login.css';
-import Logo from '../../assets/logo.png';
+import Logo from '../../assets/logo1.png';
 
 const Login = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const navigate = useNavigate();
 
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError('');
+    setMessage('');
     axios.post('http://localhost:3001/', { name, password })
       .then(result => {
-        console.log(result.data);
-        if (result.data === "You are connected") {
+        const { success, message } = result.data;
+
+        if (success) {
           setName('');
           setPassword('');
-          navigate('/dashboard');
+          setTimeout(() => navigate('/dashboard'), 1000);
         } else {
-          alert(result.data); // show message for incorrect password/user
+          setError(message) // show message for incorrect password/user
         }
       })
       .catch(err => console.log(err));
@@ -71,6 +78,8 @@ const Login = () => {
         <button className="login-button" type='submit'>
           Login
         </button>
+        {error && <p className="text-red-500">{error}</p>}
+        {message && <p className="text-green-500">{message}</p>}
         <Link to='/register' className='link-display'>
           Don't have an account? Sign up
         </Link>
